@@ -1,12 +1,18 @@
-# ExampleMod
+# GrabbersGalore
 
-A [ResoniteModLoader](https://github.com/resonite-modding-group/ResoniteModLoader) mod for [Resonite](https://resonite.com/) that does something.
-<!-- Edit to describe what your mod does and what it may solve -->
-<!-- If your mod solves an issue, you should link to any relevant issues on the resonite github -->
+A [ResoniteModLoader](https://github.com/resonite-modding-group/ResoniteModLoader) mod for [Resonite](https://resonite.com/) that allows you to add more Grabbers to your avatar.
 
+## Usage
+To make a new grabber, follow these steps:
+1. Make a new slot for your grabber.
+2. Add a `DynamicVariableSpace` to the slot with the name `GrabbersGalore`.
+3. Add a `DynamicValueVariable<bool>` to the slot, and set the `VariableName` to `Grabbing`.
+4. Add a `Grabber` to the slot.
+5. Set yourself as the `Grabber`'s `AutoUpdateUser`.
+Now the Grabber will attempt a grab once the variable is toggled on. It will release once it's toggled off.
 
 ## Screenshots
-<!-- If your mod has visible effects in the game, attach some images or video of it in-use here! Otherwise remove this section -->
+TBA
 
 ## Installation
 1. Install [ResoniteModLoader](https://github.com/resonite-modding-group/ResoniteModLoader).

@@ -21,6 +21,9 @@
     <PackageReference Include="BepInEx.AssemblyPublicizer.MSBuild" Version="0.4.3"></PackageReference>
 		<PackageReference Include="ResoniteModLoader" Version="5.0.1" />
 		<PackageReference Include="Lib.Harmony" Version="2.4.2" />
+    <Reference Include="Elements.Core">
+      <HintPath>$(ResonitePath)Elements.Core.dll</HintPath>
+    </Reference>
     <Reference Include="Renderite.Shared">
       <HintPath>$(ResonitePath)Renderite.Shared.dll</HintPath>
     </Reference>
