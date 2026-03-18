@@ -11,10 +11,18 @@ To make a new grabber, follow these steps:
 5. Set yourself as the `Grabber`'s `AutoUpdateUser`.
 Now the Grabber will attempt a grab once the variable is toggled on. It will release once it's toggled off.
 
+> [!NOTE]
+> These modded grabbers don't support the following:
+> - Acting upon objects with the context menu (Save Held/Destroy)
+> - Transfer Grabbing (a.k.a. Grab Smuggling)
+> 
+> The grabbers DO generate undo steps, and can also grab dynamic bones.
+
 ## Screenshots
-TBA
+<img width="1280" height="720" alt="2026-03-17 07 18 45" src="https://github.com/user-attachments/assets/93fa5efb-dee4-4bcc-93f4-c0ca0a0b8067" />
+
 
 ## Installation
 1. Install [ResoniteModLoader](https://github.com/resonite-modding-group/ResoniteModLoader).
-1. Place [ExampleModName.dll](https://github.com/YourGithubUsername/YourModRepoName/releases/latest/download/ExampleModName.dll) into your `rml_mods` folder. This folder should be at `C:\Program Files (x86)\Steam\steamapps\common\Resonite\rml_mods` for a default install. You can create it if it's missing, or if you launch the game once with ResoniteModLoader installed it will create this folder for you.
+1. Place [GrabbersGalore.dll](https://github.com/noblereign/ResoniteGrabbersGalore/releases/latest/download/GrabbersGalore.dll) into your `rml_mods` folder. This folder should be at `C:\Program Files (x86)\Steam\steamapps\common\Resonite\rml_mods` for a default install. You can create it if it's missing, or if you launch the game once with ResoniteModLoader installed it will create this folder for you.
 1. Start the game. If you want to verify that the mod is working you can check your Resonite logs.
