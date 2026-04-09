@@ -26,7 +26,7 @@ public class GrabbersGalore : ResoniteMod {
 		harmony.PatchAll();
 	}
 
-	private static readonly Dictionary<Grabber, bool> lastGrabState = new();
+	private static readonly ConditionalWeakTable<Grabber, StrongBox<bool>> lastGrabState = new();
 
 	[HarmonyPatch(typeof(Grabber), "OnCommonUpdate")]
 	class Grabber_OnCommonUpdate_Patch {
@@ -38,38 +38,23 @@ public class GrabbersGalore : ResoniteMod {
 					varSpace.TryReadValue<bool>("Grabbing", out bool doGrab);
 					bool hasCustomGrabSize = varSpace.TryReadValue<float>("Radius", out float customGrabSize);
 
-					bool _lastGrab = lastGrabState.GetValueOrDefault(__instance, false);
+					if (!lastGrabState.TryGetValue(__instance, out var box)) {
+						box = new StrongBox<bool>(false);
+						lastGrabState.Add(__instance, box);
+					}
+					bool _lastGrab = box.Value;
 
 					if (doGrab && !_lastGrab) {
 						__instance.Grab(__instance.Slot.GlobalPosition, __instance.Slot.LocalScaleToGlobal(hasCustomGrabSize ? customGrabSize : 0.02f));
-						lastGrabState[__instance] = true;
+						box.Value = true;
 					} else if (!doGrab && _lastGrab) {
 						__instance.Release();
-						lastGrabState[__instance] = false;
+						box.Value = false;
 					}
-				} else if (lastGrabState.ContainsKey(__instance)) {
+				} else {
 					lastGrabState.Remove(__instance);
 				}
 			}
-		}
-	}
-
-	[HarmonyPatch(typeof(Grabber), "OnDestroy")]
-	class Grabber_OnDestroy_Patch {
-		static void Postfix(Grabber __instance) {
-			if (lastGrabState.ContainsKey(__instance)) {
-				lastGrabState.Remove(__instance);
-			}
-		}
-	}
-
-	[HarmonyPatch(typeof(Grabber), "OnDispose")]
-	class Grabber_OnDispose_Patch {
-		static bool Prefix(Grabber __instance) {
-			if (lastGrabState.ContainsKey(__instance)) {
-				lastGrabState.Remove(__instance);
-			}
-			return true;
 		}
 	}
 }
