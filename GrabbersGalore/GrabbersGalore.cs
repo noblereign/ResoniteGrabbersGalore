@@ -7,7 +7,7 @@ using ResoniteModLoader;
 namespace GrabbersGalore;
 //More info on creating mods can be found https://github.com/resonite-modding-group/ResoniteModLoader/wiki/Creating-Mods
 public class GrabbersGalore : ResoniteMod {
-	internal const string VERSION_CONSTANT = "1.0.1"; //Changing the version here updates it in all locations needed
+	internal const string VERSION_CONSTANT = "1.1.0"; //Changing the version here updates it in all locations needed
 	public override string Name => "GrabbersGalore";
 	public override string Author => "Noble";
 	public override string Version => VERSION_CONSTANT;
@@ -36,10 +36,12 @@ public class GrabbersGalore : ResoniteMod {
 				DynamicVariableSpace varSpace = __instance.Slot.FindSpace("GrabbersGalore");
 				if (varSpace != null) {
 					varSpace.TryReadValue<bool>("Grabbing", out bool doGrab);
+					bool hasCustomGrabSize = varSpace.TryReadValue<float>("Radius", out float customGrabSize);
+
 					bool _lastGrab = lastGrabState.GetValueOrDefault(__instance, false);
 
 					if (doGrab && !_lastGrab) {
-						__instance.Grab(__instance.Slot.GlobalPosition, __instance.Slot.LocalScaleToGlobal(0.02f));
+						__instance.Grab(__instance.Slot.GlobalPosition, __instance.Slot.LocalScaleToGlobal(hasCustomGrabSize ? customGrabSize : 0.02f));
 						lastGrabState[__instance] = true;
 					} else if (!doGrab && _lastGrab) {
 						__instance.Release();
