@@ -11,6 +11,8 @@ To make a new grabber, follow these steps:
 5. Set yourself as the `Grabber`'s `AutoUpdateUser`.
 Now the Grabber will attempt a grab once the variable is toggled on. It will release once it's toggled off.
 
+You can also add a `DynamicValueVariable<float>` to the slot with the `VariableName` set to `Radius`, allowing you to set the distance of the grabber in local scale. By default this is set to 0.02, which matches the default in the Grabber code.
+
 > [!NOTE]
 > These modded grabbers don't support the following:
 > - Acting upon objects with the context menu (Save Held/Destroy)
